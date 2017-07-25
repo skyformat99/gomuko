@@ -1,16 +1,16 @@
-#include "struct/Point.c"
+#include "gameMap.h"
 
-int directX[] = {0, 1, 1, 1, 0, -1, -1, -1};
-int directY[] = {1, 1, 0, -1, -1, -1, 0, 1};
+static int directX[] = {0, 1, 1, 1, 0, -1, -1, -1};
+static int directY[] = {1, 1, 0, -1, -1, -1, 0, 1};
 
-const int BOARD_SIZE = 15;
+static const int BOARD_SIZE = 15;
 
-bool reachable(struct Point point)
+int reachable(struct Point point)
 {
     if (point.x < 0 || point.x >= BOARD_SIZE)
-        return false;
+        return 0;
     if (point.y < 0 || point.y >= BOARD_SIZE)
-        return false;
-    return true;
+        return 0;
+    return 1;
 }
 

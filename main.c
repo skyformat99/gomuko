@@ -1,6 +1,6 @@
 #include "game.c"
 #include "stdio.h"
-#include "helper/mapDriver.c"
+#include "helper/mapDriver.h"
 
 int main()
 {

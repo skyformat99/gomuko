@@ -1,8 +1,6 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include "../struct/Color.c"
+#include "mapDriver.h"
 
-const int BOARD_SIZE = 15;
+static const int BOARD_SIZE = 15;
 
 enum Color **readMap()
 {
