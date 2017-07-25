@@ -2,22 +2,22 @@
 #include <stdlib.h>
 #include "../struct/Color.c"
 
-const int SIZE = 15;
+const int BOARD_SIZE = 15;
 
 enum Color **readMap()
 {
     freopen("data/gameData.txt", "r", stdin);
     //初始化
-    enum Color **map = (enum Color **)malloc(sizeof(enum Color *) * SIZE);
-    for (int i = 0; i < SIZE; i++)
-        map[i] = (enum Color *)malloc(sizeof(enum Color) * SIZE);
+    enum Color **map = (enum Color **)malloc(sizeof(enum Color *) * BOARD_SIZE);
+    for (int i = 0; i < BOARD_SIZE; i++)
+        map[i] = (enum Color *)malloc(sizeof(enum Color) * BOARD_SIZE);
 
     int bufferSize = 32;
     char *buffer = (char *)malloc(sizeof(char) * bufferSize);
-    for (int i = 0; i < SIZE; i++)
+    for (int i = 0; i < BOARD_SIZE; i++)
     {
         scanf("%s", buffer);
-        for (int j = 0; j < SIZE; j++)
+        for (int j = 0; j < BOARD_SIZE; j++)
         {
             char value = buffer[j];
             if (value == 'x')
@@ -34,9 +34,9 @@ enum Color **readMap()
 
 void printMapToConsole(enum Color **map)
 {
-    for (int i = 0; i < SIZE; i++)
+    for (int i = 0; i < BOARD_SIZE; i++)
     {
-        for (int j = 0; j < SIZE; j++)
+        for (int j = 0; j < BOARD_SIZE; j++)
         {
             enum Color value = map[i][j];
             if (value == BLACK)
