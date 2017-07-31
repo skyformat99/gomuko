@@ -1,21 +1,21 @@
 #include "mapDriver.h"
+#include "Config.h"
 
-static const int BOARD_SIZE = 15;
+static const int BUFFER_SIZE = 32;
 
 enum Color **readMap()
 {
     freopen("data/gameData.txt", "r", stdin);
     //初始化
-    enum Color **map = (enum Color **)malloc(sizeof(enum Color *) * BOARD_SIZE);
-    for (int i = 0; i < BOARD_SIZE; i++)
-        map[i] = (enum Color *)malloc(sizeof(enum Color) * BOARD_SIZE);
+    enum Color **map = new enum Color *[Config::size];
+    for (int i = 0; i < Config::size; i++)
+        map[i] = new enum Color[Config::size];
 
-    int bufferSize = 32;
-    char *buffer = (char *)malloc(sizeof(char) * bufferSize);
-    for (int i = 0; i < BOARD_SIZE; i++)
+    char *buffer = new char[BUFFER_SIZE];
+    for (int i = 0; i < Config::size; i++)
     {
         scanf("%s", buffer);
-        for (int j = 0; j < BOARD_SIZE; j++)
+        for (int j = 0; j < Config::size; j++)
         {
             char value = buffer[j];
             if (value == 'x')
@@ -26,15 +26,15 @@ enum Color **readMap()
                 map[i][j] = VOID;
         }
     }
-    free(buffer);
+    delete[] buffer;
     return map;
 }
 
 void printMapToConsole(enum Color **map)
 {
-    for (int i = 0; i < BOARD_SIZE; i++)
+    for (int i = 0; i < Config::size; i++)
     {
-        for (int j = 0; j < BOARD_SIZE; j++)
+        for (int j = 0; j < Config::size; j++)
         {
             enum Color value = map[i][j];
             if (value == BLACK)
