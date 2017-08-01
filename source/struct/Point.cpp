@@ -1,5 +1,5 @@
-#ifndef _POINT_
-#define _POINT_
+#ifndef _Point_
+#define _Point_
 struct Point
 {
     int x, y;

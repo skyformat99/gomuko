@@ -5,6 +5,10 @@
 const int GameMap::directX[8] = {0, 1, 1, 1, 0, -1, -1, -1};
 const int GameMap::directY[8] = {1, 1, 0, -1, -1, -1, 0, 1};
 
+GameMap::GameMap()
+{
+}
+
 GameMap::GameMap(enum Color **value)
 {
     map = value;

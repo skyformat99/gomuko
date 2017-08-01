@@ -1,5 +1,5 @@
-#ifndef _WIN_CHECKER_
-#define _WIN_CHECKER_
+#ifndef _WinChecker_
+#define _WinChecker_
 
 #include "struct/Color.cpp"
 #include "Config.h"

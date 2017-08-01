@@ -1,5 +1,5 @@
-#ifndef _GAME_MAP_
-#define _GAME_MAP_
+#ifndef _GameMap_
+#define _GameMap_
 
 #include <vector>
 #include "struct/Point.cpp"
@@ -8,6 +8,8 @@
 class GameMap
 {
   public:
+    GameMap();
+
     GameMap(enum Color **value);
 
     enum Color **getMap();
@@ -29,8 +31,6 @@ class GameMap
   private:
     const static int directX[8];
     const static int directY[8];
-
-    static const int MIN_VALUE = -10000000;
 
     enum Color **map;
 };

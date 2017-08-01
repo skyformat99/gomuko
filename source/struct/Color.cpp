@@ -1,5 +1,5 @@
-#ifndef _COLOR_
-#define _COLOR_
+#ifndef _Color_
+#define _Color_
 
 enum Color
 {

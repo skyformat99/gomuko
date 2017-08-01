@@ -1,9 +1,12 @@
-#ifndef _CONFIG_
-#define _CONFIG_
+#ifndef _Config_
+#define _Config_
 
 class Config
 {
   public:
+    static const int MAX_VALUE = 1000000;
+    static const int MIN_VALUE = -1000000;
+
     static const int size = 15;
 
     int searchDeep;

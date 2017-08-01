@@ -11,6 +11,8 @@ class Score
 
     int getMapScore();
 
+    void setColorAndUpdate(struct Point point, enum Color color, enum Color forwardColor, enum Color aiColor);
+
   private:
     const static int ONE = 1;
     const static int TWO = 10;
@@ -29,8 +31,6 @@ class Score
     int value;
 
     int getValueByCount(int blackCount, int whiteCount, enum Color color);
-
-    void setColorAndUpdate(struct Point point, enum Color color, enum Color forwardColor, enum Color aiColor);
 };
 
 #endif
