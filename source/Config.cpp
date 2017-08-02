@@ -1,4 +1,10 @@
+#include "Config.h"
 
-int searchDeep = 4;
+Config::Config()
+{
+    searchDeep = 4;
 
-int comboDeep = 0;
+    comboDeep = 0;
+
+    debug = true;
+}

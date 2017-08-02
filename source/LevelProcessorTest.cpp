@@ -2,6 +2,8 @@
 #include "mapDriver.h"
 #include "struct/Color.cpp"
 #include "LevelProcessor.h"
+#include "logger.h"
+
 
 int main()
 {

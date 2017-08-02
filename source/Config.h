@@ -4,6 +4,8 @@
 class Config
 {
   public:
+    Config();
+
     static const int MAX_VALUE = 1000000;
     static const int MIN_VALUE = -1000000;
 
@@ -12,6 +14,8 @@ class Config
     int searchDeep;
 
     int comboDeep;
+
+    bool debug;
 };
 
 #endif

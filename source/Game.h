@@ -8,6 +8,7 @@
 #include "struct/Point.cpp"
 #include "LevelProcessor.h"
 #include "Score.h"
+#include "logger.h"
 
 class Game
 {

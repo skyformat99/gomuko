@@ -1,13 +1,12 @@
 #include "Score.h"
 #include "stdio.h"
 
-int value = 0;
-
 const int Score::directX[4] = {0, 1, 1, 1};
 const int Score::directY[4] = {1, 1, 0, -1};
 
 void Score::initScore(enum Color **map, enum Color aiColor)
 {
+    value = 0;
     for (int i = 0; i < Config::size; i++)
     {
         for (int j = 0; j < Config::size; j++)

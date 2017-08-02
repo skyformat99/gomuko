@@ -3,6 +3,7 @@
 #include "struct/Color.cpp"
 #include <stdio.h>
 #include <string>
+#include "logger.h"
 
 int main()
 {

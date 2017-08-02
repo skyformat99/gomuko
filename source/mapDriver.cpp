@@ -30,21 +30,3 @@ enum Color **readMap()
     return map;
 }
 
-void printMapToConsole(enum Color **map)
-{
-    for (int i = 0; i < Config::size; i++)
-    {
-        for (int j = 0; j < Config::size; j++)
-        {
-            enum Color value = map[i][j];
-            if (value == BLACK)
-                printf("x");
-            if (value == WHITE)
-                printf("o");
-            if (value == VOID)
-                printf(".");
-        }
-        printf("\n");
-    }
-    printf("\n");
-}

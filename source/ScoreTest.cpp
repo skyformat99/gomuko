@@ -2,6 +2,7 @@
 #include "mapDriver.h"
 #include "struct/Color.cpp"
 #include <stdio.h>
+#include "logger.h"
 
 int main()
 {

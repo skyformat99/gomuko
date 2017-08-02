@@ -1,6 +1,7 @@
 #include "GameMap.h"
 #include "mapDriver.h"
 #include "struct/Color.cpp"
+#include "logger.h"
 
 int main()
 {

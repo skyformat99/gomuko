@@ -5,12 +5,15 @@
 #include "../Config.h"
 #include "vector"
 #include <stdlib.h>
-
-#define random(x) (rand() % x)
+#include <ctime>
 
 class Result
 {
   public:
+    Result(){
+        srand((unsigned)time(0));
+    }
+
     void add(struct Point point, int value)
     {
         if (value > maxValue)
@@ -19,7 +22,8 @@ class Result
             pointList.clear();
         }
         pointList.push_back(point);
-        *this->point = pointList[random(pointList.size())];
+        int index = rand() % pointList.size();
+        this->point = &pointList[index];
     }
 
     void reset()

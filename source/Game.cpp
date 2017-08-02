@@ -9,7 +9,6 @@ void Game::init(enum Color **map, Config config)
 
 Result *Game::search(enum Color color)
 {
-    printf("enter search\n");
     result.reset();
     counter.clear();
     aiColor = color;
@@ -17,13 +16,10 @@ Result *Game::search(enum Color color)
     {
         return NULL;
     }
-    printf("win check finish\n");
     //积分预处理
     score.initScore(gameMap.getMap(), aiColor);
-    printf("score init finish\n");
     //只有一个扩展点的情形直接返回
     std::vector<struct Point> points = levelProcessor.getExpandPoints(gameMap, color);
-    printf("expand check finish size = %ld\n", points.size());
     if (points.size() == 1)
     {
         result.add(points[0], 0);
@@ -68,12 +64,15 @@ int Game::dfsScore(int level, enum Color color, int parentMin, int parentMax)
             }
             if (level == config.searchDeep)
             {
-                printf("point %d %d valiue = %d\n", point.x, point.y, value);
                 if (value >= extreme)
                 {
                     result.add(point, value);
                 }
                 counter.count++;
+                if (config.debug)
+                {
+                    printSelectPoint(point, value, counter);
+                }
             }
             if (value > extreme)
             {
