@@ -9,6 +9,9 @@
 #include "LevelProcessor.h"
 #include "Score.h"
 #include "logger.h"
+#include "Analyzer.h"
+
+using namespace std;
 
 class Game
 {

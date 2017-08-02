@@ -5,6 +5,8 @@
 #include "struct/Point.cpp"
 #include "struct/Color.cpp"
 
+using namespace std;
+
 class GameMap
 {
   public:
@@ -26,7 +28,7 @@ class GameMap
 
     bool checkColors(enum Color color, struct Point point, int direct, int start, int end);
 
-    std::vector<struct Point> getNeighbor(enum Color color);
+    vector<struct Point> getNeighbor(enum Color color);
 
   private:
     const static int directX[8];

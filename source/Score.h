@@ -13,6 +13,8 @@ class Score
 
     void setColorAndUpdate(struct Point point, enum Color color, enum Color forwardColor, enum Color aiColor);
 
+    int*** getColorCount(enum Color color);
+
   private:
     const static int ONE = 1;
     const static int TWO = 10;
@@ -25,8 +27,8 @@ class Score
     //使用动态规划
     //定义：    f[i][j][k] 表示以i,j为终点，在方向k上的统计
     //转移方程: f[i][j][k] = a[i][j][k] + f[i-dx[k]][j-dy[k]][k]
-    int blackCount[Config::size][Config::size][4];
-    int whiteCount[Config::size][Config::size][4];
+    int*** blackCount;
+    int*** whiteCount;
 
     int value;
 

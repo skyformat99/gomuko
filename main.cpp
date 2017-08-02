@@ -12,7 +12,6 @@ int main()
     Game game = Game();
     Config config;
     config.searchDeep = 6;
-    printf("%d\n", config.debug);
     game.init(map, config);
     printMapToConsole(map);
     Result *result = game.search(BLACK);

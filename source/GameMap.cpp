@@ -16,18 +16,18 @@ GameMap::GameMap(enum Color **value)
 
 bool GameMap::reachable(int x, int y)
 {
-    if (x < 0 || y >= Config::size)
+    if (x < 0 || x >= Config::size)
         return false;
-    if (x < 0 || y >= Config::size)
+    if (y < 0 || y >= Config::size)
         return false;
     return true;
 }
 
 bool GameMap::reachable(struct Point point)
 {
-    if (point.x < 0 || point.y >= Config::size)
+    if (point.x < 0 || point.x >= Config::size)
         return false;
-    if (point.x < 0 || point.y >= Config::size)
+    if (point.y < 0 || point.y >= Config::size)
         return false;
     return true;
 }
@@ -72,10 +72,10 @@ bool GameMap::checkColors(enum Color color, struct Point point, int direct, int 
     return true;
 }
 
-std::vector<struct Point> GameMap::getNeighbor(enum Color color)
+vector<struct Point> GameMap::getNeighbor(enum Color color)
 {
     int range = 2;
-    std::vector<struct Point> result;
+    vector<struct Point> result;
 
     int signalOne[Config::size][Config::size];
     int signalCurrentColorTwo[Config::size][Config::size];

@@ -6,11 +6,18 @@ const int Score::directY[4] = {1, 1, 0, -1};
 
 void Score::initScore(enum Color **map, enum Color aiColor)
 {
+    //初始化数组
+    blackCount = new int**[Config::size];
+    whiteCount = new int**[Config::size];
     value = 0;
     for (int i = 0; i < Config::size; i++)
     {
+        blackCount[i] = new int*[Config::size];
+        whiteCount[i] = new int*[Config::size];
         for (int j = 0; j < Config::size; j++)
         {
+           blackCount[i][j] = new int[4];
+           whiteCount[i][j] = new int[4];
             for (int k = 0; k < 4; k++)
             {
                 blackCount[i][j][k] = 0;
@@ -118,47 +125,15 @@ void Score::setColorAndUpdate(struct Point point, enum Color color, enum Color f
     }
 }
 
-// int*** getColorCount(enum Color color)
-// {
-//     if (color == BLACK)
-//     {
-//         return blackCount;
-//     }
-//     if (color == WHITE)
-//     {
-//         return whiteCount;
-//     }
-//     return NULL;
-// }   }
-//     return NULL;
-// }       return whiteCount;
-//     }
-//     return NULL;
-// }   if (color == WHITE)
-//     {
-//         return whiteCount;
-//     }
-//     return NULL;
-// }   return NULL;
-// }   return NULL;
-// }       return whiteCount;
-//     }
-//     return NULL;
-// }   if (color == WHITE)
-//     {
-//         return whiteCount;
-//     }
-//     return NULL;
-// }   return NULL;
-// }   }
-//     return NULL;
-// }       return whiteCount;
-//     }
-//     return NULL;
-// }   if (color == WHITE)
-//     {
-//         return whiteCount;
-//     }
-//     return NULL;
-// }   return NULL;
-// }
+int*** Score::getColorCount(Color color)
+{
+    if (color == BLACK)
+    {
+        return blackCount;
+    }
+    if (color == WHITE)
+    {
+        return whiteCount;
+    }
+    return NULL;
+}

@@ -24,6 +24,40 @@ void printMapToConsole(enum Color **map)
 
 void printSelectPoint(struct Point point, int value, Counter counter)
 {
-    int second = (clock() - currentTime)/(CLOCKS_PER_SEC/1000);
+    int second = (clock() - currentTime) / (CLOCKS_PER_SEC / 1000);
     printf("point %d %d value = %d count = %d time = %d ms \n", point.x, point.y, value, counter.count, second);
+}
+
+void printPointVector(vector<struct Point> points)
+{
+    for (int i = 0; i < points.size(); i++)
+        printf("(%d, %d) ", points[i].x, points[i].y);
+    printf("\n");
+}
+
+void printPointSet(set<struct Point> points)
+{
+    set<struct Point>::iterator it;
+    for (it = points.begin(); it != points.end(); it++)
+        printf("(%d, %d) ", (*it).x, (*it).y);
+    printf("\n");
+}
+
+void printAnalyzePoints(Analyzer analyzer)
+{
+    printf("FIVE A\n");
+    printPointSet(analyzer.fiveAttack);
+    printf("FOUR A\n");
+    printPointSet(analyzer.fourAttack);
+    printf("FOUR D\n");
+    printPointSet(analyzer.fourDefence);
+    printf("THREE A\n");
+    printPointSet(analyzer.threeOpenAttack);
+    printf("THREE D\n");
+    printPointSet(analyzer.threeDefence);
+    printf("TWO A\n");
+    printPointSet(analyzer.twoAttack);
+    printf("FULL\n");
+    printPointSet(analyzer.fullPoints);
+    printf("\n");
 }

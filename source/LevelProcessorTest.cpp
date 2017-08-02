@@ -3,7 +3,9 @@
 #include "struct/Color.cpp"
 #include "LevelProcessor.h"
 #include "logger.h"
+#include "Analyzer.h"
 
+using namespace std;
 
 int main()
 {
@@ -12,7 +14,10 @@ int main()
     printMapToConsole(map);
 
     LevelProcessor levelProcessor;
-    std::vector<struct Point> points = levelProcessor.getExpandPoints(gameMap, BLACK);
+    Score score;
+    score.initScore(map, BLACK);
+    Analyzer data = Analyzer(gameMap, BLACK, gameMap.getNeighbor(BLACK), score);
+    vector<struct Point> points = levelProcessor.getExpandPoints(data);
     printf("%ld\n", points.size());
     for (int i = 0; i < points.size(); i++)
     {

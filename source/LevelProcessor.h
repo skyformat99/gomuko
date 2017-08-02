@@ -4,12 +4,22 @@
 #include "GameMap.h"
 #include "struct/Color.cpp"
 #include "vector"
+#include "set"
+#include "Analyzer.h"
+
+using namespace std;
 
 class LevelProcessor
 {
   public:
-    std::vector<struct Point> getExpandPoints(GameMap gameMap, enum Color color);
+    vector<struct Point> getExpandPoints(Analyzer data);
     
+  private:
+    vector<struct Point> selectSet(Analyzer data);
+
+    vector<struct Point> converToVector(set<struct Point> points);
+
+    vector<struct Point> removeRepeat(vector<struct Point> points);
 };
 
 #endif
