@@ -28,8 +28,10 @@ class GameMap
 
     bool checkColors(enum Color color, struct Point point, int direct, int start, int end);
 
-    vector<struct Point> getNeighbor(enum Color color);
+    vector<struct Point> *getNeighbor(enum Color color);
 
+    vector<struct Point> result;
+    
   private:
     const static int directX[8];
     const static int directY[8];

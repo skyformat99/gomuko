@@ -17,9 +17,9 @@ class LevelProcessor
   private:
     vector<struct Point> selectSet(Analyzer *data);
 
-    vector<struct Point> converToVector(set<struct Point> points);
+    vector<struct Point> converToVector(set<struct Point> *points);
 
-    vector<struct Point> removeRepeat(vector<struct Point> points);
+    vector<struct Point> removeRepeat(vector<struct Point> *points);
 };
 
 #endif

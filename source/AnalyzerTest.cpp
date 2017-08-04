@@ -21,10 +21,9 @@ int main()
     enum Color **map = readMap();
     printMapToConsole(map);
     GameMap gameMap = GameMap(map);
-    vector<struct Point> points = gameMap.getNeighbor(WHITE);
     Score score = Score();
     score.initScore(map, WHITE);
-    Analyzer analyzer = Analyzer(gameMap, WHITE, points, score);
+    Analyzer analyzer = Analyzer(&gameMap, WHITE, gameMap.getNeighbor(WHITE), &score);
     printf("FIVE A\n");
     print(analyzer.fiveAttack);
     printf("FOUR A\n");

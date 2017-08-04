@@ -19,7 +19,7 @@ Result *Game::search(enum Color color)
     //积分预处理
     score.initScore(gameMap.getMap(), aiColor);
     //只有一个扩展点的情形直接返回
-    Analyzer data = Analyzer(gameMap, color, gameMap.getNeighbor(color), score);
+    Analyzer data = Analyzer(&gameMap, color, gameMap.getNeighbor(color), &score);
     vector<struct Point> points = levelProcessor.getExpandPoints(&data);
     if (points.size() == 1)
     {
@@ -38,7 +38,7 @@ int Game::dfsScore(int level, enum Color color, int parentMin, int parentMax)
         return getScore();
     }
     //分析棋型
-    Analyzer data = Analyzer(gameMap, color, gameMap.getNeighbor(color), score);
+    Analyzer data = Analyzer(&gameMap, color, gameMap.getNeighbor(color), &score);
     //输赢判定
     if (data.fiveAttack.size() > 0)
     {

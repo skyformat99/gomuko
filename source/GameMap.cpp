@@ -72,10 +72,10 @@ bool GameMap::checkColors(enum Color color, struct Point point, int direct, int 
     return true;
 }
 
-vector<struct Point> GameMap::getNeighbor(enum Color color)
+vector<struct Point> *GameMap::getNeighbor(enum Color color)
 {
+    result.clear();
     int range = 2;
-    vector<struct Point> result;
 
     int signalOne[Config::size][Config::size];
     int signalCurrentColorTwo[Config::size][Config::size];
@@ -153,5 +153,5 @@ vector<struct Point> GameMap::getNeighbor(enum Color color)
             }
         }
 
-    return result;
+    return &result;
 }

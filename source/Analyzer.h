@@ -12,7 +12,7 @@ using namespace std;
 class Analyzer
 {
   public:
-    Analyzer(GameMap gameMap, Color color, vector<struct Point> points, Score score);
+    Analyzer(GameMap *gameMap, Color color, vector<struct Point> *points, Score *score);
 
     set<struct Point> fiveAttack;
 
