@@ -1,7 +1,7 @@
 #ifndef _SCORE_
 #define _SCORE_
 
-#include "gameMap.h"
+#include "GameMap.h"
 #include "Config.h"
 
 class Score
