@@ -12,10 +12,10 @@ using namespace std;
 class LevelProcessor
 {
   public:
-    vector<struct Point> getExpandPoints(Analyzer data);
+    vector<struct Point> getExpandPoints(Analyzer *data);
     
   private:
-    vector<struct Point> selectSet(Analyzer data);
+    vector<struct Point> selectSet(Analyzer *data);
 
     vector<struct Point> converToVector(set<struct Point> points);
 

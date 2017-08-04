@@ -20,7 +20,7 @@ Result *Game::search(enum Color color)
     score.initScore(gameMap.getMap(), aiColor);
     //只有一个扩展点的情形直接返回
     Analyzer data = Analyzer(gameMap, color, gameMap.getNeighbor(color), score);
-    vector<struct Point> points = levelProcessor.getExpandPoints(data);
+    vector<struct Point> points = levelProcessor.getExpandPoints(&data);
     if (points.size() == 1)
     {
         result.add(points[0], 0);
@@ -48,7 +48,7 @@ int Game::dfsScore(int level, enum Color color, int parentMin, int parentMax)
             return Config::MIN_VALUE;
     }
     //计算扩展节点
-    vector<struct Point> points = levelProcessor.getExpandPoints(data);
+    vector<struct Point> points = levelProcessor.getExpandPoints(&data);
     //进度计算
     if (level == config.searchDeep)
     {
