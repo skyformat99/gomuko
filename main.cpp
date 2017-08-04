@@ -15,5 +15,10 @@ int main()
     game.init(map, config);
     printMapToConsole(map);
     Result *result = game.search(WHITE);
+
+    struct Point *point = result->getPoint();
+    map[point->x][point->y] = WHITE;
+
+    writeMap(map);
     printf("%d %d\n", result->getPoint()->x, result->getPoint()->y);
 }

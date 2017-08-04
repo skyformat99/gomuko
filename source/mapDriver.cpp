@@ -30,3 +30,21 @@ enum Color **readMap()
     return map;
 }
 
+void writeMap(enum Color **map)
+{
+    freopen("data/gameData.txt", "w", stdout);
+    for (int i = 0; i < Config::size; i++)
+    {
+        for (int j = 0; j < Config::size; j++)
+        {
+            enum Color value = map[i][j];
+            if (value == BLACK)
+                printf("x");
+            if (value == WHITE)
+                printf("o");
+            if (value == VOID)
+                printf(".");
+        }
+        printf("\n");
+    }
+}
