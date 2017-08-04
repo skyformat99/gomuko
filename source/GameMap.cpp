@@ -72,8 +72,32 @@ bool GameMap::checkColors(enum Color color, struct Point point, int direct, int 
     return true;
 }
 
-vector<struct Point> *GameMap::getNeighbor(enum Color color)
+vector<struct Point> GameMap::getOnePointLine(struct Point point)
 {
+    vector<struct Point> result;
+    for (int i = 0; i < 8; i++)
+    {
+        int x = point.x;
+        int y = point.y;
+        for (int k = 1; k < 5; k++)
+        {
+            x += directX[i];
+            y += directY[i];
+            if (reachable(x, y))
+            {
+                if (getColor(x, y) == VOID)
+                {
+                    result.push_back(Point(x, y));
+                }
+            }
+        }
+    }
+    return result;
+}
+
+vector<struct Point> GameMap::getNeighbor(enum Color color)
+{
+    vector<struct Point> result;
     result.clear();
     int range = 2;
 
@@ -153,5 +177,5 @@ vector<struct Point> *GameMap::getNeighbor(enum Color color)
             }
         }
 
-    return &result;
+    return result;
 }

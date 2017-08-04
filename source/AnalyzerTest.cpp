@@ -23,7 +23,8 @@ int main()
     GameMap gameMap = GameMap(map);
     Score score = Score();
     score.initScore(map, WHITE);
-    Analyzer analyzer = Analyzer(&gameMap, WHITE, gameMap.getNeighbor(WHITE), &score);
+    vector<struct Point> neighbor = gameMap.getNeighbor(WHITE);
+    Analyzer analyzer = Analyzer(&gameMap, WHITE, &neighbor, &score);
     printf("FIVE A\n");
     print(analyzer.fiveAttack);
     printf("FOUR A\n");

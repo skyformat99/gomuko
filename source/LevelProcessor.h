@@ -19,6 +19,10 @@ class LevelProcessor
 
     vector<struct Point> converToVector(set<struct Point> *points);
 
+    vector<struct Point> converToVector(set<struct Point> *points1, set<struct Point> *points2);
+
+    vector<struct Point> converToVector(set<struct Point> *points1, set<struct Point> *points2, set<struct Point> *points3, set<struct Point> *points4);
+
     vector<struct Point> removeRepeat(vector<struct Point> *points);
 };
 
