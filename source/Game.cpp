@@ -19,8 +19,8 @@ Result *Game::search(enum Color color)
     //积分预处理
     score.initScore(gameMap.getMap(), aiColor);
     //只有一个扩展点的情形直接返回
-    Analyzer data = Analyzer(gameMap, color, gameMap.getNeighbor(color), score);
-    vector<struct Point> points = levelProcessor.getExpandPoints(data);
+    data.reset(&gameMap, color, gameMap.getNeighbor(color), &score);
+    vector<struct Point> points = *levelProcessor.getExpandPoints(&data);
     if (points.size() == 1)
     {
         result.add(points[0], 0);
@@ -38,17 +38,19 @@ int Game::dfsScore(int level, enum Color color, int parentMin, int parentMax)
         return getScore();
     }
     //分析棋型
-    Analyzer data = Analyzer(gameMap, color, gameMap.getNeighbor(color), score);
+    // vector<struct Point> neighboors = gameMap.getNeighbor(color);
+    // data.reset(&gameMap, color, &neighboors, &score);
     //输赢判定
-    if (data.fiveAttack.size() > 0)
-    {
-        if (color == aiColor)
-            return Config::MAX_VALUE;
-        if (color == getOtherColor(aiColor))
-            return Config::MIN_VALUE;
-    }
+    // if (data.fiveAttack.size() > 0)
+    // {
+    //     if (color == aiColor)
+    //         return Config::MAX_VALUE;
+    //     if (color == getOtherColor(aiColor))
+    //         return Config::MIN_VALUE;
+    // }
     //计算扩展节点
-    vector<struct Point> points = levelProcessor.getExpandPoints(data);
+    // vector<struct Point> points = *levelProcessor.getExpandPoints(&data);
+    vector<struct Point> points = *levelProcessor.getExpandPoints(&gameMap, color);
     //进度计算
     if (level == config.searchDeep)
     {

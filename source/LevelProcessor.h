@@ -12,14 +12,32 @@ using namespace std;
 class LevelProcessor
 {
   public:
-    vector<struct Point> getExpandPoints(Analyzer data);
-    
+    vector<struct Point> *getExpandPoints(Analyzer *data);
+
+    vector<struct Point> *getExpandPoints(GameMap *gameMap,enum Color color);
+
   private:
-    vector<struct Point> selectSet(Analyzer data);
+    void selectSet(Analyzer *data);
 
-    vector<struct Point> converToVector(set<struct Point> points);
+    void converToVector(set<struct Point> *points, vector<struct Point> *target);
 
-    vector<struct Point> removeRepeat(vector<struct Point> points);
+    void removeRepeat();
+
+    vector<struct Point> result;
+
+    vector<struct Point> finalResult;
+
+    set<struct Point> hash;
+
+    vector<struct Point> pointFullPoints;
+
+    vector<struct Point> pointFourAttack;
+
+    vector<struct Point> pointThreeOpenAttack;
+
+    vector<struct Point> pointThreeDefence;
+
+    vector<struct Point> pointTwoAttack;
 };
 
 #endif

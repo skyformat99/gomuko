@@ -34,7 +34,9 @@ class Game
     Color aiColor;
 
     Score score;
-
+    
+    Analyzer data;
+    
     int dfsScore(int level, enum Color color, int parentMin, int parentMax);
 
     void setColor(struct Point point, enum Color color, enum Color forwardColor, enum Color aiColor);

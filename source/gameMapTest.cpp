@@ -8,7 +8,7 @@ int main()
     enum Color **map = readMap();
     GameMap gameMap = GameMap(map);
     printMapToConsole(map);
-    std::vector<struct Point> points = gameMap.getNeighbor(BLACK);
+    std::vector<struct Point> points = *(gameMap.getNeighbor(BLACK));
     printf("%ld\n", points.size());
     for (int i = 0; i < points.size(); i++)
     {

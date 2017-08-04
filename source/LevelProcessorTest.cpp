@@ -15,9 +15,12 @@ int main()
 
     LevelProcessor levelProcessor;
     Score score;
-    score.initScore(map, BLACK);
-    Analyzer data = Analyzer(gameMap, BLACK, gameMap.getNeighbor(BLACK), score);
-    vector<struct Point> points = levelProcessor.getExpandPoints(data);
+    score.initScore(map, WHITE);
+    Analyzer data;
+    
+    data.reset(&gameMap, WHITE, gameMap.getNeighbor(WHITE), &score);
+    printAnalyzePoints(data);
+    vector<struct Point> points = *levelProcessor.getExpandPoints(&data);
     printf("%ld\n", points.size());
     for (int i = 0; i < points.size(); i++)
     {
