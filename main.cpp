@@ -14,6 +14,6 @@ int main()
     config.searchDeep = 6;
     game.init(map, config);
     printMapToConsole(map);
-    Result *result = game.search(BLACK);
+    Result *result = game.search(WHITE);
     printf("%d %d\n", result->getPoint()->x, result->getPoint()->y);
 }
