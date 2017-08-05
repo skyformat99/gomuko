@@ -13,8 +13,8 @@ int main()
     Game game = Game();
     Config config;
     config.searchDeep = 6;
-    config.comboDeep = 3;
-    bool printSwitch = false;
+    config.comboDeep = 11;
+    bool printSwitch = true;
 
     game.init(map, config);
     printMapToConsole(map);

@@ -16,18 +16,10 @@ Result *Game::search(enum Color color)
     {
         return NULL;
     }
-    //判断是否需要计算combo
-    int count = 0;
-    for (int i = 0; i < Config::size; i++)
-        for (int j = 0; j < Config::size; j++)
-            if (gameMap.getColor(i, j) != VOID)
-                count++;
-    if (count <= config.comboStartTurn)
-        config.comboDeep = 0;
     //积分预处理
     score.initScore(gameMap.getMap(), aiColor);
     //连击初始化
-    finisher.init(&gameMap, &score, &counter);
+    finisher.init(&gameMap, &score, &counter, &config);
     //只有一个扩展点的情形直接返回
     vector<struct Point> neighbor = gameMap.getNeighbor(color);
     Analyzer data = Analyzer(&gameMap, color, &neighbor, &score);
@@ -44,22 +36,22 @@ Result *Game::search(enum Color color)
 int Game::dfsScore(int level, enum Color color, int parentMin, int parentMax)
 {
     //斩杀剪枝
-    if (level == 0)
+    if (level == config.searchDeep - 2)
     {
         if (color == aiColor)
         {
-            if (finisher.canKill(color, config.comboDeep))
+            if (finisher.canKill(color) != NULL)
             {
                 return Config::MAX_VALUE;
             }
         }
     }
-    if (level == 1)
+    if (level == config.searchDeep - 3)
     {
         //谨慎处理败北的情形
         if (color != aiColor)
         {
-            if (finisher.canKill(color, config.comboDeep))
+            if (finisher.canKill(color) != NULL)
             {
                 return Config::MIN_VALUE;
             }

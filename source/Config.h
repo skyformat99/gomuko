@@ -15,8 +15,6 @@ class Config
 
     int comboDeep;
 
-    int comboStartTurn;
-
     bool debug;
 };
 

@@ -23,12 +23,15 @@ int main()
     printMapToConsole(map);
     GameMap gameMap = GameMap(map);
     Score score = Score();
-    score.initScore(map, BLACK);
-    vector<struct Point> neighbor = gameMap.getNeighbor(BLACK);
+    enum Color color = WHITE;
+    score.initScore(map, color);
+    vector<struct Point> neighbor = gameMap.getNeighbor(color);
     Finisher finisher;
     Counter counter;
-    finisher.init(&gameMap, &score, &counter);
-    bool result = finisher.canKill(BLACK, 7);
+    Config config;
+    config.comboDeep = 11;
+    finisher.init(&gameMap, &score, &counter, &config);
+    bool result = finisher.canKill(color);
     printf("%d\n", result);
     return 0;
 }

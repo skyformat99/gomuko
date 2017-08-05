@@ -95,6 +95,7 @@ vector<struct Point> GameMap::getOnePointLine(struct Point point)
     return result;
 }
 
+//可以做成动态计算
 vector<struct Point> GameMap::getNeighbor(enum Color color)
 {
     vector<struct Point> result;

@@ -11,29 +11,33 @@
 
 class Finisher
 {
-  public:
-    void init(GameMap *gameMap, Score *score, Counter *counter);
+public:
+  void init(GameMap *gameMap, Score *score, Counter *counter, Config *config);
 
-    bool canKill(enum Color targetColor, int deep);
+  struct Point *canKill(enum Color targetColor);
 
-  private:
-    GameMap *gameMap;
+private:
+  GameMap *gameMap;
 
-    Score *score;
+  Score *score;
 
-    Counter *counter;
+  Counter *counter;
 
-    bool dfsKill(enum Color color, enum Color targetColor, int level, struct Point *lastPoint);
+  Config *config;
 
-    vector<struct Point> getComboAttackPoints(enum Color color, Analyzer *data);
+  struct Point result;
 
-    vector<struct Point> getComboDefencePoints(enum Color color, Analyzer *data);
+  bool dfsKill(enum Color color, enum Color targetColor, int level, struct Point *lastPoint);
 
-    void setColor(struct Point point, enum Color color, enum Color forwardColor, enum Color aiColor);
+  vector<struct Point> getComboAttackPoints(enum Color color, Analyzer *data);
 
-    static vector<struct Point> converToVector(set<struct Point> *points);
+  vector<struct Point> getComboDefencePoints(enum Color color, Analyzer *data);
 
-    static vector<struct Point> converToVector(set<struct Point> *points1, set<struct Point> *points2);
+  void setColor(struct Point point, enum Color color, enum Color forwardColor, enum Color aiColor);
+
+  static vector<struct Point> converToVector(set<struct Point> *points);
+
+  static vector<struct Point> converToVector(set<struct Point> *points1, set<struct Point> *points2);
 };
 
 #endif

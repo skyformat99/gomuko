@@ -1,16 +1,18 @@
 #include "Finisher.h"
 
-void Finisher::init(GameMap *gameMap, Score *score, Counter *counter)
+void Finisher::init(GameMap *gameMap, Score *score, Counter *counter, Config *config)
 {
     this->gameMap = gameMap;
     this->score = score;
     this->counter = counter;
+    this->config = config;
 }
 
-bool Finisher::canKill(enum Color targetColor, int deep)
+struct Point *Finisher::canKill(enum Color targetColor)
 {
-    bool result = dfsKill(targetColor, targetColor, deep, NULL);
-    return result;
+    if (dfsKill(targetColor, targetColor, config->comboDeep, NULL))
+        return &result;
+    return NULL;
 }
 
 bool Finisher::dfsKill(enum Color color, enum Color targetColor, int level, struct Point *lastPoint)
@@ -28,7 +30,8 @@ bool Finisher::dfsKill(enum Color color, enum Color targetColor, int level, stru
     }
     else
     {
-        rangePoints = gameMap->getOnePointLine(*lastPoint);
+        rangePoints = gameMap->getNeighbor(color);
+        // rangePoints = gameMap->getOnePointLine(*lastPoint);
     }
     Analyzer data = Analyzer(gameMap, color, &rangePoints, score);
     if (color == targetColor)
@@ -51,6 +54,10 @@ bool Finisher::dfsKill(enum Color color, enum Color targetColor, int level, stru
             bool value = dfsKill(getOtherColor(color), targetColor, level - 1, nextLastPoint);
             if (value)
             {
+                if (level == config->comboDeep)
+                {
+                    result = point;
+                }
                 setColor(point, VOID, color, targetColor);
                 return true;
             }
