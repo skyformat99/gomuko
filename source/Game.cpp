@@ -16,8 +16,18 @@ Result *Game::search(enum Color color)
     {
         return NULL;
     }
+    //判断是否需要计算combo
+    int count = 0;
+    for (int i = 0; i < Config::size; i++)
+        for (int j = 0; j < Config::size; j++)
+            if (gameMap.getColor(i, j) != VOID)
+                count++;
+    if (count <= config.comboDeep)
+        config.comboDeep = 0;
     //积分预处理
     score.initScore(gameMap.getMap(), aiColor);
+    //连击初始化
+    finisher.init(&gameMap, &score, &counter);
     //只有一个扩展点的情形直接返回
     vector<struct Point> neighbor = gameMap.getNeighbor(color);
     Analyzer data = Analyzer(&gameMap, color, &neighbor, &score);
@@ -38,7 +48,7 @@ int Game::dfsScore(int level, enum Color color, int parentMin, int parentMax)
     {
         if (color == aiColor)
         {
-            if (Finisher::canKill(&gameMap, color, config.comboDeep, &score))
+            if (finisher.canKill(color, config.comboDeep))
             {
                 return Config::MAX_VALUE;
             }
@@ -49,7 +59,7 @@ int Game::dfsScore(int level, enum Color color, int parentMin, int parentMax)
         //谨慎处理败北的情形
         if (color != aiColor)
         {
-            if (Finisher::canKill(&gameMap, color, config.comboDeep, &score))
+            if (finisher.canKill(color, config.comboDeep))
             {
                 return Config::MIN_VALUE;
             }
@@ -66,6 +76,7 @@ int Game::dfsScore(int level, enum Color color, int parentMin, int parentMax)
     //输赢判定
     if (data.fiveAttack.size() > 0)
     {
+        counter.count++;
         if (color == aiColor)
             return Config::MAX_VALUE;
         if (color == getOtherColor(aiColor))
@@ -98,7 +109,7 @@ int Game::dfsScore(int level, enum Color color, int parentMin, int parentMax)
                 {
                     result.add(point, value);
                 }
-                counter.count++;
+                counter.finishStep++;
                 if (config.debug)
                 {
                     printSelectPoint(point, value, counter);

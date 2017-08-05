@@ -25,7 +25,10 @@ int main()
     Score score = Score();
     score.initScore(map, BLACK);
     vector<struct Point> neighbor = gameMap.getNeighbor(BLACK);
-    bool result = Finisher::canKill(&gameMap, BLACK, 7, &score);
+    Finisher finisher;
+    Counter counter;
+    finisher.init(&gameMap, &score, &counter);
+    bool result = finisher.canKill(BLACK, 7);
     printf("%d\n", result);
     return 0;
 }

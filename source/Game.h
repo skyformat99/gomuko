@@ -36,6 +36,8 @@ class Game
 
     Score score;
 
+    Finisher finisher;
+
     int dfsScore(int level, enum Color color, int parentMin, int parentMax);
 
     void setColor(struct Point point, enum Color color, enum Color forwardColor, enum Color aiColor);

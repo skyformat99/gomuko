@@ -25,7 +25,7 @@ void printMapToConsole(enum Color **map)
 void printSelectPoint(struct Point point, int value, Counter counter)
 {
     int second = (clock() - currentTime) / (CLOCKS_PER_SEC / 1000);
-    printf("point %d %d value = %d count = %d time = %d ms \n", point.x, point.y, value, counter.count, second);
+    printf("point %d %d value = %d count = %d comboCount = %d time = %d ms \n", point.x, point.y, value, counter.count, counter.comboCount, second);
 }
 
 void printPointVector(vector<struct Point> points)

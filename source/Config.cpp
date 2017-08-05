@@ -7,4 +7,6 @@ Config::Config()
     comboDeep = 0;
 
     debug = true;
+
+    comboStartTurn = 6;
 }

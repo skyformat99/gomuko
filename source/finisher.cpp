@@ -1,16 +1,23 @@
 #include "Finisher.h"
 
-bool Finisher::canKill(GameMap *gameMap, enum Color targetColor, int deep, Score *score)
+void Finisher::init(GameMap *gameMap, Score *score, Counter *counter)
 {
-    bool result = dfsKill(gameMap, targetColor, targetColor, deep, score, NULL);
+    this->gameMap = gameMap;
+    this->score = score;
+    this->counter = counter;
+}
+
+bool Finisher::canKill(enum Color targetColor, int deep)
+{
+    bool result = dfsKill(targetColor, targetColor, deep, NULL);
     return result;
 }
 
-bool Finisher::dfsKill(GameMap *gameMap, enum Color color, enum Color targetColor, int level, Score *score, struct Point *lastPoint)
+bool Finisher::dfsKill(enum Color color, enum Color targetColor, int level, struct Point *lastPoint)
 {
-    // printf("%d\n", level);
     if (level == 0)
     {
+        counter->comboCount++;
         return false;
     }
     //连招只按相邻直线路径计算
@@ -24,35 +31,30 @@ bool Finisher::dfsKill(GameMap *gameMap, enum Color color, enum Color targetColo
         rangePoints = gameMap->getOnePointLine(*lastPoint);
     }
     Analyzer data = Analyzer(gameMap, color, &rangePoints, score);
-    // printf("analyze ok\n");
     if (color == targetColor)
     {
         if (data.fiveAttack.size() > 0)
         {
+            counter->comboCount++;
             return true;
         }
-        vector<struct Point> points = getComboAttackPoints(gameMap, color, &data);
+        vector<struct Point> points = getComboAttackPoints(color, &data);
         for (int i = 0; i < points.size(); i++)
         {
             struct Point point = points[i];
-            // printf("point x= %d y= %d\n", point.x, point.y);
-            setColor(point, color, VOID, targetColor, score, gameMap);
-            // printf("set color ok\n");
+            setColor(point, color, VOID, targetColor);
             struct Point *nextLastPoint = lastPoint;
-            // printf("111\n");
             if (data.fourAttack.find(point) != data.fourAttack.end() || data.threeOpenAttack.find(point) != data.threeOpenAttack.end())
             {
-                // printf("222\n");
                 nextLastPoint = &point;
             }
-            // printf("ready to next dfs\n");
-            bool value = dfsKill(gameMap, getOtherColor(color), targetColor, level - 1, score, nextLastPoint);
+            bool value = dfsKill(getOtherColor(color), targetColor, level - 1, nextLastPoint);
             if (value)
             {
-                setColor(point, VOID, color, targetColor, score, gameMap);
+                setColor(point, VOID, color, targetColor);
                 return true;
             }
-            setColor(point, VOID, color, targetColor, score, gameMap);
+            setColor(point, VOID, color, targetColor);
         }
         return false;
     }
@@ -60,9 +62,10 @@ bool Finisher::dfsKill(GameMap *gameMap, enum Color color, enum Color targetColo
     {
         if (data.fiveAttack.size() > 0)
         {
+            counter->comboCount++;
             return false;
         }
-        vector<struct Point> points = getComboDefencePoints(gameMap, color, &data);
+        vector<struct Point> points = getComboDefencePoints(color, &data);
         //如果没有能防的则结束
         if (points.size() == 0)
         {
@@ -71,20 +74,20 @@ bool Finisher::dfsKill(GameMap *gameMap, enum Color color, enum Color targetColo
         for (int i = 0; i < points.size(); i++)
         {
             struct Point point = points[i];
-            setColor(point, color, VOID, targetColor, score, gameMap);
-            bool value = dfsKill(gameMap, getOtherColor(color), targetColor, level - 1, score, lastPoint);
+            setColor(point, color, VOID, targetColor);
+            bool value = dfsKill(getOtherColor(color), targetColor, level - 1, lastPoint);
             if (!value)
             {
-                setColor(point, VOID, color, targetColor, score, gameMap);
+                setColor(point, VOID, color, targetColor);
                 return false;
             }
-            setColor(point, VOID, color, targetColor, score, gameMap);
+            setColor(point, VOID, color, targetColor);
         }
         return true;
     }
 }
 
-vector<struct Point> Finisher::getComboAttackPoints(GameMap *gameMap, Color color, Analyzer *data)
+vector<struct Point> Finisher::getComboAttackPoints(enum Color color, Analyzer *data)
 {
     //如果有对方冲4，则防冲4
     if (data->fourDefence.size() > 0)
@@ -99,7 +102,7 @@ vector<struct Point> Finisher::getComboAttackPoints(GameMap *gameMap, Color colo
     return converToVector(&data->fourAttack, &data->threeOpenAttack);
 }
 
-vector<struct Point> Finisher::getComboDefencePoints(GameMap *gameMap, Color color, Analyzer *data)
+vector<struct Point> Finisher::getComboDefencePoints(enum Color color, Analyzer *data)
 {
     //如果有对方冲4，则防冲4
     if (data->fourDefence.size() > 0)
@@ -115,7 +118,7 @@ vector<struct Point> Finisher::getComboDefencePoints(GameMap *gameMap, Color col
     return result;
 }
 
-void Finisher::setColor(Point point, Color color, Color forwardColor, Color aiColor, Score *score, GameMap *gameMap)
+void Finisher::setColor(Point point, Color color, Color forwardColor, Color aiColor)
 {
     score->setColorAndUpdate(point, color, forwardColor, aiColor);
     gameMap->setColor(point, color);

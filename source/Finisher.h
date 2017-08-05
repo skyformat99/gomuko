@@ -4,6 +4,7 @@
 #include "Analyzer.h"
 #include "struct/Color.cpp"
 #include "struct/Point.cpp"
+#include "struct/Counter.cpp"
 #include "GameMap.h"
 #include "Score.h"
 #include "logger.h"
@@ -11,17 +12,25 @@
 class Finisher
 {
   public:
-    static bool canKill(GameMap *gameMap, enum Color targetColor, int deep, Score *score);
+    void init(GameMap *gameMap, Score *score, Counter *counter);
+
+    bool canKill(enum Color targetColor, int deep);
 
   private:
-    static bool dfsKill(GameMap *gameMap, enum Color color, enum Color targetColor, int level, Score *score,struct Point *lastPoint);
+    GameMap *gameMap;
 
-    static vector<struct Point> getComboAttackPoints(GameMap *gameMap, Color color, Analyzer *data);
+    Score *score;
 
-    static vector<struct Point> getComboDefencePoints(GameMap *gameMap, Color color, Analyzer *data);
+    Counter *counter;
 
-    static void setColor(Point point, Color color, Color forwardColor, Color aiColor, Score *score, GameMap *gameMap);
-    
+    bool dfsKill(enum Color color, enum Color targetColor, int level, struct Point *lastPoint);
+
+    vector<struct Point> getComboAttackPoints(enum Color color, Analyzer *data);
+
+    vector<struct Point> getComboDefencePoints(enum Color color, Analyzer *data);
+
+    void setColor(struct Point point, enum Color color, enum Color forwardColor, enum Color aiColor);
+
     static vector<struct Point> converToVector(set<struct Point> *points);
 
     static vector<struct Point> converToVector(set<struct Point> *points1, set<struct Point> *points2);

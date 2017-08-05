@@ -9,7 +9,7 @@
 int main()
 {
     enum Color **map = readMap();
-    enum Color color = BLACK;
+    enum Color color = WHITE;
     Game game = Game();
     Config config;
     config.searchDeep = 6;
