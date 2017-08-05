@@ -10,29 +10,19 @@ void Finisher::init(GameMap *gameMap, Score *score, Counter *counter, Config *co
 
 struct Point *Finisher::canKill(enum Color targetColor)
 {
-    if (dfsKill(targetColor, targetColor, config->comboDeep, NULL))
+    if (dfsKill(targetColor, targetColor, config->comboDeep))
         return &result;
     return NULL;
 }
 
-bool Finisher::dfsKill(enum Color color, enum Color targetColor, int level, struct Point *lastPoint)
+bool Finisher::dfsKill(enum Color color, enum Color targetColor, int level)
 {
     if (level == 0)
     {
         counter->comboCount++;
         return false;
     }
-    //连招只按相邻直线路径计算
-    vector<struct Point> rangePoints;
-    if (lastPoint == NULL)
-    {
-        rangePoints = gameMap->getNeighbor(color);
-    }
-    else
-    {
-        rangePoints = gameMap->getNeighbor(color);
-        // rangePoints = gameMap->getOnePointLine(*lastPoint);
-    }
+    vector<struct Point> rangePoints = gameMap->getNeighbor(color);
     Analyzer data = Analyzer(gameMap, color, &rangePoints, score);
     if (color == targetColor)
     {
@@ -46,12 +36,7 @@ bool Finisher::dfsKill(enum Color color, enum Color targetColor, int level, stru
         {
             struct Point point = points[i];
             setColor(point, color, VOID, targetColor);
-            struct Point *nextLastPoint = lastPoint;
-            if (data.fourAttack.find(point) != data.fourAttack.end() || data.threeOpenAttack.find(point) != data.threeOpenAttack.end())
-            {
-                nextLastPoint = &point;
-            }
-            bool value = dfsKill(getOtherColor(color), targetColor, level - 1, nextLastPoint);
+            bool value = dfsKill(getOtherColor(color), targetColor, level - 1);
             if (value)
             {
                 if (level == config->comboDeep)
@@ -82,7 +67,7 @@ bool Finisher::dfsKill(enum Color color, enum Color targetColor, int level, stru
         {
             struct Point point = points[i];
             setColor(point, color, VOID, targetColor);
-            bool value = dfsKill(getOtherColor(color), targetColor, level - 1, lastPoint);
+            bool value = dfsKill(getOtherColor(color), targetColor, level - 1);
             if (!value)
             {
                 setColor(point, VOID, color, targetColor);

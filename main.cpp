@@ -9,12 +9,12 @@
 int main()
 {
     enum Color **map = readMap();
-    enum Color color = WHITE;
+    enum Color color = BLACK;
     Game game = Game();
     Config config;
     config.searchDeep = 6;
     config.comboDeep = 11;
-    bool printSwitch = true;
+    bool printSwitch = false;
 
     game.init(map, config);
     printMapToConsole(map);

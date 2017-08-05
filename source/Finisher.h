@@ -27,7 +27,7 @@ private:
 
   struct Point result;
 
-  bool dfsKill(enum Color color, enum Color targetColor, int level, struct Point *lastPoint);
+  bool dfsKill(enum Color color, enum Color targetColor, int level);
 
   vector<struct Point> getComboAttackPoints(enum Color color, Analyzer *data);
 
