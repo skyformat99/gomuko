@@ -22,7 +22,7 @@ Result *Game::search(enum Color color)
         for (int j = 0; j < Config::size; j++)
             if (gameMap.getColor(i, j) != VOID)
                 count++;
-    if (count <= config.comboDeep)
+    if (count <= config.comboStartTurn)
         config.comboDeep = 0;
     //积分预处理
     score.initScore(gameMap.getMap(), aiColor);

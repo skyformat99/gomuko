@@ -8,5 +8,5 @@ Config::Config()
 
     debug = true;
 
-    comboStartTurn = 6;
+    comboStartTurn = 10;
 }
