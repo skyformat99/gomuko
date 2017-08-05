@@ -33,6 +33,28 @@ Result *Game::search(enum Color color)
 
 int Game::dfsScore(int level, enum Color color, int parentMin, int parentMax)
 {
+    //斩杀剪枝
+    if (level == 0)
+    {
+        if (color == aiColor)
+        {
+            if (Finisher::canKill(&gameMap, color, config.comboDeep, &score))
+            {
+                return Config::MAX_VALUE;
+            }
+        }
+    }
+    if (level == 1)
+    {
+        //谨慎处理败北的情形
+        if (color != aiColor)
+        {
+            if (Finisher::canKill(&gameMap, color, config.comboDeep, &score))
+            {
+                return Config::MIN_VALUE;
+            }
+        }
+    }
     //叶子分数计算
     if (level == 0)
     {

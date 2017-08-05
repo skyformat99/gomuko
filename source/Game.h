@@ -10,6 +10,7 @@
 #include "Score.h"
 #include "logger.h"
 #include "Analyzer.h"
+#include "Finisher.h"
 
 using namespace std;
 

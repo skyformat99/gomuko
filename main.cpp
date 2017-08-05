@@ -9,17 +9,19 @@
 int main()
 {
     enum Color **map = readMap();
+    enum Color color = BLACK;
     Game game = Game();
     Config config;
     config.searchDeep = 6;
+    config.comboDeep = 3;
     bool printSwitch = false;
 
     game.init(map, config);
     printMapToConsole(map);
-    Result *result = game.search(WHITE);
+    Result *result = game.search(color);
 
     struct Point *point = result->getPoint();
-    map[point->x][point->y] = WHITE;
+    map[point->x][point->y] = color;
 
     if (printSwitch)
     {
